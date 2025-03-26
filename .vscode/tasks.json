@@ -1,0 +1,99 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build C++ project",
+            "type": "cppbuild",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-I",
+                "${env:vsc_portable_root}\\catch2",
+                "-I",
+                "${workspaceFolder}/include",
+                "-o",
+                "bin/main.exe",
+                "src/main.cpp",
+                "-L",
+                "${env:vsc_portable_root}catch2",
+                "-L",
+                "${workspaceFolder}/lib",
+                "-L",
+                "${workspaceFolder}/lib/SDL2",
+                "-lmingw32",
+                "-lCatch",
+                "-lSDL2main",
+                "-lSDL2",
+                "-std=c++17",
+                "-I",
+                "${env:vsc_portable_root}\\catch2",
+                "-I",
+                "${workspaceFolder}/include",
+                "-o",
+                "bin/main.exe",
+                "src/main.cpp",
+                "-L",
+                "${env:vsc_portable_root}catch2",
+                "-L",
+                "${workspaceFolder}/lib",
+                "-L",
+                "${workspaceFolder}/lib/SDL2",
+                "-lmingw32",
+                "-lCatch",
+                "-static-libstdc++",
+                "-static-libgcc",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+        },
+        {
+            "label": "Build C++ project with debugging information",
+            "type": "cppbuild",
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "command": "g++",
+            "args": [
+                "-g",
+                "-std=c++17",
+                "-I",
+                "${workspaceFolder}/include",
+                "-I",
+                "C:/llvm-mingw/include",
+                "-o",
+                "bin/main.exe",
+                "src/main.cpp",
+                "-L",
+                "${workspaceFolder}/lib",
+                "-L",
+                "C:/llvm-mingw/lib",
+
+                "-lmingw32",
+                "-static-libstdc++",
+                "-static-libgcc",
+
+                // Boost - ssl
+                "-lboost_system",
+                "-lssl",
+                "-lcrypto",
+
+                // Winsock
+                "-lWs2_32",
+                "-lMswsock",
+                "-lAdvApi32",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+        }
+    ]
+}
