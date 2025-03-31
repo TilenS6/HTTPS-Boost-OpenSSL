@@ -85,6 +85,11 @@
                 "-lboost_system",
                 "-lssl",
                 "-lcrypto",
+                
+                //"-lboost_iostreams", // for GZIP
+                "-lboost_zlib", // for GZIP
+                //"-lboost_bzip2",
+                "-lz", // Zlib
 
                 // Winsock
                 "-lWs2_32",

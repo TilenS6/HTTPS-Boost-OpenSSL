@@ -3,7 +3,13 @@
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
 #include <boost/beast/ssl.hpp>
+#include <boost/iostreams/filtering_streambuf.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/filter/zlib.hpp>
+#include <boost/iostreams/copy.hpp>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -12,8 +18,8 @@ public:
     explicit HTTPSRequester(const string& host);
     ~HTTPSRequester();
 
-    string get(const string& target);
-    string post(const string& target, const string& body);
+    string request(const string& target, const string& type = "GET", const string& header_key_vals = "", const string& body = "");
+    // string post(const string& target, const string& body);
     operator bool() const { return connected_; }
 
 private:
@@ -25,8 +31,11 @@ private:
     bool connected_ = false;
 
     void connect();
-    string send_request(boost::beast::http::verb method, const string& target, const string& body);
+    string send_request(boost::beast::http::verb method, const string& target, const string& body = "", const string& = "");
     void close();
 };
 
+string decompressGZip(const string& compressedData);
+
+#include "encodings.cpp"
 #include "https_requester.cpp"
